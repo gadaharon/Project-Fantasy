@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileShooter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // THis will be replaced with an SO of the selected projectile
+    [SerializeField] float damage;
+    [SerializeField] GameObject projectile;
+    [SerializeField] Transform spawnPoint;
+    [SerializeField] Camera fpsCam;
 
-    // Update is called once per frame
-    void Update()
+    public void ShootProjectile()
     {
-        
+        Instantiate(projectile, spawnPoint.position, fpsCam.transform.rotation);
     }
 }

@@ -1,20 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimationHandler : MonoBehaviour
 {
-    PlayerCombat playerCombat;
     Animator animator;
+    ProjectileShooter projectileShooter;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
-    }
-
-    void Start()
-    {
-        playerCombat = PlayerCombat.Instance;
+        projectileShooter = GetComponent<ProjectileShooter>();
     }
 
     public void PlayMeleeAttackAnimation(int comboHit)
@@ -26,9 +20,13 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         animator.SetBool("IsSpellcasting", isSpellCasting);
     }
-
-    void OnAttackFinishedAnimEvent()
+    public void PlaySpellCastAnimation()
     {
-        playerCombat.SetIsAttacking(false);
+        animator.SetTrigger("RangeAttack");
+    }
+
+    void SpellCastAnimationEvent()
+    {
+        projectileShooter.ShootProjectile();
     }
 }
