@@ -17,10 +17,9 @@ public class PlayerAnimationHandler : MonoBehaviour
         playerCombat = PlayerCombat.Instance;
     }
 
-    public void PlayMeleeAttackAnimation()
+    public void PlayMeleeAttackAnimation(int comboHit)
     {
-        playerCombat.SetIsAttacking(true);
-        animator.SetTrigger("Attack");
+        animator.SetInteger("ComboHit", comboHit);
     }
 
     public void PlaySpellCastAnimation(bool isSpellCasting)
