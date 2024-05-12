@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] float damage;
+    [SerializeField] float damage = 1f;
     [SerializeField] string tagToHit;
 
     [SerializeField] bool canDamage = false;

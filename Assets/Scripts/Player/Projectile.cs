@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] float damage = 1f;
     [SerializeField] float speed = 20f;
     [SerializeField] float duration = 3f;
 
@@ -21,6 +22,7 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.name);
+        other.GetComponent<IDamageable>()?.TakeDamage(damage);
         Destroy(gameObject);
     }
 

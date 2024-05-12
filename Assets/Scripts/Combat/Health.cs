@@ -12,7 +12,9 @@ public class Health : MonoBehaviour
 
     [SerializeField] float startingHealth = 10f;
 
-    float currentHealth;
+    // Serialized for debugging
+    // TODO: Remove SerializedField
+    [SerializeField] float currentHealth;
 
     void Awake()
     {
