@@ -1,16 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : MonoBehaviour, IDamageable
 {
-    public static PlayerCombat Instance { get; private set; }
     public bool IsAttacking => isAttacking;
 
     [SerializeField] float comboTimeout = 1f;
     [SerializeField] float AttackCD = .2f; // Attack cooldown
 
+
     PlayerAnimationHandler playerAnimationHandler;
+    Weapon playerWeapon;
+    Health health;
     Coroutine comboCoroutine;
+
     bool isAttacking;
     int maxComboHits = 3;
     int comboHits = 0;
@@ -18,12 +21,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-
+        health = GetComponent<Health>();
         playerAnimationHandler = GetComponentInChildren<PlayerAnimationHandler>();
+        playerWeapon = GetComponentInChildren<Weapon>();
     }
 
     void Update()
@@ -32,7 +32,7 @@ public class PlayerCombat : MonoBehaviour
         HandleRangeAttack();
     }
 
-    private void HandleMeleeAttack()
+    void HandleMeleeAttack()
     {
         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > AttackCD)
         {
@@ -51,19 +51,11 @@ public class PlayerCombat : MonoBehaviour
         {
             playerAnimationHandler.PlaySpellCastAnimation();
         }
-        // if (Input.GetMouseButton(1))
-        // {
-        //     playerAnimationHandler.PlaySpellCastAnimation(true);
-        // }
-        // else
-        // {
-        //     playerAnimationHandler.PlaySpellCastAnimation(false);
-        // }
     }
 
     IEnumerator MeleeAttackRoutine()
     {
-        if (!isAttacking) { isAttacking = true; }
+        if (!isAttacking) { SetIsAttacking(true); }
 
         comboHits = Mathf.Min(comboHits + 1, maxComboHits);
         playerAnimationHandler.PlayMeleeAttackAnimation(comboHits);
@@ -72,12 +64,16 @@ public class PlayerCombat : MonoBehaviour
 
         comboHits = 0;
         playerAnimationHandler.PlayMeleeAttackAnimation(comboHits);
-        isAttacking = false;
+        SetIsAttacking(false);
     }
 
-    public void SetIsAttacking(bool isAttacking)
+    void SetIsAttacking(bool isAttacking)
     {
-        this.isAttacking = isAttacking;
+        playerWeapon.SetCanDamage(isAttacking);
     }
 
+    public void TakeDamage(float damage)
+    {
+        health.TakeDamage(damage);
+    }
 }
