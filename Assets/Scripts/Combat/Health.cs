@@ -43,8 +43,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("I'm Dead");
-            // OnDeath?.Invoke(this);
+            OnDeath?.Invoke(this);
         }
     }
 }

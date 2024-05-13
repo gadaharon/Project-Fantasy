@@ -5,19 +5,34 @@ public class EnemyCombat : MonoBehaviour, IDamageable
     Health health;
     EnemyAI enemyAI;
     EnemyAttackTrigger attackTrigger;
+    EnemyAnimationHandler animationHandler;
+
+    bool isAttacking = false;
 
     void Awake()
     {
         health = GetComponent<Health>();
         enemyAI = GetComponent<EnemyAI>();
+        animationHandler = GetComponent<EnemyAnimationHandler>();
         attackTrigger = GetComponentInChildren<EnemyAttackTrigger>();
     }
 
     void Update()
     {
-        if (attackTrigger.CanAttack)
+        HandleAttack();
+    }
+
+    void HandleAttack()
+    {
+        if (attackTrigger.CanAttack && !isAttacking)
         {
-            // Debug.Log("Attacking Player");
+            isAttacking = true;
+            animationHandler.PlayAttackAnimation(true);
+        }
+        else if (!attackTrigger.CanAttack && isAttacking)
+        {
+            isAttacking = false;
+            animationHandler.PlayAttackAnimation(false);
         }
     }
 
