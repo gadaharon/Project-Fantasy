@@ -28,8 +28,11 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     void Update()
     {
-        HandleMeleeAttack();
-        HandleRangeAttack();
+        if (GameManager.Instance.State == GameManager.GameState.Playing)
+        {
+            HandleMeleeAttack();
+            HandleRangeAttack();
+        }
     }
 
     void HandleMeleeAttack()

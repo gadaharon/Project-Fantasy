@@ -17,4 +17,11 @@ public class EnemyAnimationHandler : MonoBehaviour
 
         animator.SetBool("IsAttacking", isAttacking);
     }
+
+    public void PlayDeathAnimation()
+    {
+        if (animator == null) { return; }
+
+        animator.SetTrigger("Death");
+    }
 }

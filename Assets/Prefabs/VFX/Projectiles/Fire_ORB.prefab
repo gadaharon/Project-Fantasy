@@ -14522,7 +14522,7 @@ GameObject:
   - component: {fileID: -4920054941785791644}
   - component: {fileID: -9015302819456051927}
   - component: {fileID: 5264980235154872161}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fire_ORB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19366,7 +19366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea21c263f648a0a4e8f87e6eab0c5db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   speed: 20
+  duration: 3
 --- !u!54 &-9015302819456051927
 Rigidbody:
   m_ObjectHideFlags: 0

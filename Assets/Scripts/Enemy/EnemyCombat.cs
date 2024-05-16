@@ -38,7 +38,7 @@ public class EnemyCombat : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        enemyAI.StartFollow();
+        enemyAI.TriggerEnemy();
         health.TakeDamage(damage);
     }
 }
