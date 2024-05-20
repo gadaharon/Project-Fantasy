@@ -1,13 +1,15 @@
+using System;
 
+public enum GameState
+{
+    Playing,
+    Pause,
+    GameOver
+}
 
 public class GameManager : Singleton<GameManager>
 {
-    public enum GameState
-    {
-        Playing,
-        Pause,
-        GameOver
-    }
+    public static Action OnGameOver;
 
     public GameState State { get; private set; }
 
@@ -15,6 +17,11 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         State = GameState.Playing;
+    }
+
+    public static void TriggerGameOver()
+    {
+        OnGameOver?.Invoke();
     }
 
     public void SetGameState(GameState newState)

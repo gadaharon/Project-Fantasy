@@ -2,13 +2,18 @@ using UnityEngine;
 
 public class EnemyAttackTrigger : MonoBehaviour
 {
-    public bool CanAttack { get; private set; }
+    EnemyCombat enemyCombat;
+
+    void Awake()
+    {
+        enemyCombat = GetComponentInParent<EnemyCombat>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            CanAttack = true;
+            enemyCombat.SetCanAttack(true);
         }
     }
 
@@ -16,7 +21,7 @@ public class EnemyAttackTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            CanAttack = false;
+            enemyCombat.SetCanAttack(false);
         }
     }
 }

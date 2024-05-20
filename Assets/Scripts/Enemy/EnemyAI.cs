@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform target;
-    [SerializeField] float range = 10f;
+    [SerializeField] float detectionRange = 10f;
     [SerializeField] float tetherDistance = 20f;
 
 
@@ -52,7 +51,7 @@ public class EnemyAI : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, target.position);
 
-        if (distance < range || isTriggered)
+        if (distance < detectionRange || isTriggered)
         {
             StartFollow();
         }
@@ -75,7 +74,7 @@ public class EnemyAI : MonoBehaviour
         isTriggered = true;
 
         yield return new WaitForSeconds(resetTriggerTime);
-        isTriggered = false;
+        isTriggered = false; // reset trigger flag
     }
 
 
@@ -87,7 +86,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void StopFollow()
+    public void StopFollow()
     {
         currentTarget = null;
     }
@@ -102,6 +101,6 @@ public class EnemyAI : MonoBehaviour
     // void OnDrawGizmos()
     // {
     //     Gizmos.color = Color.red;
-    //     Gizmos.DrawWireSphere(transform.position, range);
+    //     Gizmos.DrawWireSphere(transform.position, detectionRange);
     // }
 }

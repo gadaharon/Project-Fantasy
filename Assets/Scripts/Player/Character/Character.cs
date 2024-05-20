@@ -13,14 +13,18 @@ public class Character : Singleton<Character>
 
     public static Action OnLevelUp;
 
-    [SerializeField] int maxExperience = 250;
-    [SerializeField] int currentExperience = 0;
+    [Header("Level and EXP")]
+    [SerializeField] int baseEXP = 100;
+    [SerializeField] float expGrowthRate = 1.5f;
     [SerializeField] int skillPoints = 0;
     [SerializeField] int currentLevel = 1;
 
     [Header("Skills")]
     [SerializeField] List<Skill> skills = new List<Skill>();
 
+    [Header("For Testing")]
+    [SerializeField] int maxExperience = 100;
+    [SerializeField] int currentExperience = 0;
 
     StarterAssetsInputs starterAssetsInputs;
     CharacterSkills characterSkills;
@@ -31,6 +35,10 @@ public class Character : Singleton<Character>
 
         starterAssetsInputs = GetComponentInChildren<StarterAssetsInputs>();
         characterSkills = new CharacterSkills(skills);
+        if (currentLevel > 1)
+        {
+            maxExperience = CalculateMaxExpForNextLevel(currentLevel);
+        }
     }
 
     void Start()
@@ -52,15 +60,38 @@ public class Character : Singleton<Character>
         }
     }
 
+    // Returning the remaining exp
+    // TODO - add XP for next level in UI
+    // public int CalculateXPForNextLevel()
+    // {
+    //     return Mathf.CeilToInt(baseEXP * MathF.Pow(expGrowthRate, currentLevel));
+    // }
+
+    int CalculateEXPForLevel(int level)
+    {
+        return Mathf.CeilToInt(baseEXP * Mathf.Pow(expGrowthRate, level));
+    }
+
+    int CalculateMaxExpForNextLevel(int level)
+    {
+        int totalEXP = 0;
+
+        for (int i = 1; i < level; i++)
+        {
+            totalEXP += CalculateEXPForLevel(level);
+        }
+
+        return totalEXP;
+    }
+
     void LevelUp()
     {
-        Debug.Log("LEVEL UP!!!");
         // Increase max health
         // set to full health
         currentLevel++;
         AddSkillPoint();
         currentExperience = 0;
-        maxExperience += 100;
+        maxExperience = CalculateMaxExpForNextLevel(currentLevel);
         OnLevelUp?.Invoke();
     }
 

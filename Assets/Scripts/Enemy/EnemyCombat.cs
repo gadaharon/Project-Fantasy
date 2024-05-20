@@ -2,19 +2,30 @@ using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour, IDamageable
 {
+    [SerializeField] float damageAmount = 2f;
+
     Health health;
     EnemyAI enemyAI;
-    EnemyAttackTrigger attackTrigger;
     EnemyAnimationHandler animationHandler;
 
     bool isAttacking = false;
+    bool canAttack = false;
 
     void Awake()
     {
         health = GetComponent<Health>();
         enemyAI = GetComponent<EnemyAI>();
         animationHandler = GetComponent<EnemyAnimationHandler>();
-        attackTrigger = GetComponentInChildren<EnemyAttackTrigger>();
+    }
+
+    void OnEnable()
+    {
+        GameManager.OnGameOver += HandleGameOver;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnGameOver -= HandleGameOver;
     }
 
     void Update()
@@ -24,21 +35,37 @@ public class EnemyCombat : MonoBehaviour, IDamageable
 
     void HandleAttack()
     {
-        if (attackTrigger.CanAttack && !isAttacking)
+        if (canAttack && !isAttacking)
         {
             isAttacking = true;
             animationHandler.PlayAttackAnimation(true);
         }
-        else if (!attackTrigger.CanAttack && isAttacking)
+        else if (!canAttack && isAttacking)
         {
             isAttacking = false;
             animationHandler.PlayAttackAnimation(false);
         }
     }
 
+    public void Attack()
+    {
+        Character.Instance.gameObject.GetComponent<IDamageable>().TakeDamage(damageAmount);
+    }
+
+    public void HandleGameOver()
+    {
+        enemyAI.StopEnemyAI();
+        canAttack = false;
+    }
+
     public void TakeDamage(float damage)
     {
         enemyAI.TriggerEnemy();
         health.TakeDamage(damage);
+    }
+
+    public void SetCanAttack(bool canAttack)
+    {
+        this.canAttack = canAttack;
     }
 }

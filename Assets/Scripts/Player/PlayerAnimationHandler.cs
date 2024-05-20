@@ -3,12 +3,12 @@ using UnityEngine;
 public class PlayerAnimationHandler : MonoBehaviour
 {
     Animator animator;
-    ProjectileShooter projectileShooter;
+    SpellCastHandler spellCastHandler;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
-        projectileShooter = GetComponent<ProjectileShooter>();
+        spellCastHandler = GetComponent<SpellCastHandler>();
     }
 
     public void PlayMeleeAttackAnimation(int comboHit)
@@ -30,6 +30,6 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     void SpellCastAnimationEvent()
     {
-        projectileShooter.ShootProjectile();
+        spellCastHandler.CastCurrentSpell();
     }
 }
