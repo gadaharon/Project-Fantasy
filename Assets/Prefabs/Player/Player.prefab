@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5302288441766534638}
   - component: {fileID: 3519637452153068547}
-  - component: {fileID: 8644922873364737339}
   - component: {fileID: 3452089738635314219}
   - component: {fileID: 4725221727186040213}
   - component: {fileID: 7792181859726560337}
+  - component: {fileID: 4184539508821258534}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -64,20 +64,6 @@ MonoBehaviour:
     level: 3
   maxExperience: 100
   currentExperience: 0
---- !u!114 &8644922873364737339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9162008371680012661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7569094c2ab6c7341bdf16d4ec7640bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  comboTimeout: 1
-  AttackCD: 0.5
 --- !u!114 &3452089738635314219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingMana: 10
   currentMana: 0
+  manaBar: {fileID: 0}
 --- !u!114 &7792181859726560337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +105,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac562d83b143bb4c97fa281595c62c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4184539508821258534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162008371680012661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7569094c2ab6c7341bdf16d4ec7640bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboTimeout: 1
+  AttackCD: 0.2
+  healthBar: {fileID: 0}
 --- !u!1001 &2538407725071061102
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,15 +8,22 @@ public class Mana : MonoBehaviour
 
     [SerializeField] float startingMana = 10f;
     [SerializeField] float currentMana;
+    [SerializeField] Bar manaBar;
 
     void Awake()
     {
         currentMana = startingMana;
     }
 
+    void Start()
+    {
+        manaBar.SetMaxValue(startingMana);
+    }
+
     public void UseMana(float amount)
     {
         currentMana -= amount;
+        manaBar.UpdateSLiderValue(currentMana);
         if (currentMana < 0)
         {
             currentMana = 0;

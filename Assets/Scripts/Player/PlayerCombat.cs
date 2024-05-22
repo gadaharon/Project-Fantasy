@@ -7,6 +7,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     [SerializeField] float comboTimeout = 1f;
     [SerializeField] float AttackCD = .2f; // Attack cooldown
+    [SerializeField] Bar healthBar;
 
 
     PlayerAnimationHandler playerAnimationHandler;
@@ -24,6 +25,11 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         health = GetComponent<Health>();
         playerAnimationHandler = GetComponentInChildren<PlayerAnimationHandler>();
         playerWeapon = GetComponentInChildren<Weapon>();
+    }
+
+    void Start()
+    {
+        healthBar.SetMaxValue(health.StartingHealth);
     }
 
     void Update()
@@ -78,5 +84,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         health.TakeDamage(damage);
+        healthBar.UpdateSLiderValue(health.CurrentHealth);
     }
 }
