@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7c86d4abbd33b564b9e773aceadb8572, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465794, g: 0.4964143, b: 0.5748179, a: 1}
+  m_IndirectSpecularColor: {r: 0.5738196, g: 0.6665326, b: 0.6245935, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -161,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 206605752}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -457,7 +457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &544304281
 Transform:
   m_ObjectHideFlags: 0
@@ -467,8 +467,8 @@ Transform:
   m_GameObject: {fileID: 544304280}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 340.1, y: 101, z: 341.9}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalPosition: {x: 212.4, y: 15.13, z: 119.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 666774538}
@@ -1015,15 +1015,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5302288441766534638, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 283
+      value: 409.1
       objectReference: {fileID: 0}
     - target: {fileID: 5302288441766534638, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 100
+      value: 27.8
       objectReference: {fileID: 0}
     - target: {fileID: 5302288441766534638, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 332.4
+      value: 130.8
       objectReference: {fileID: 0}
     - target: {fileID: 5302288441766534638, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1067,7 +1067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9162008371680012661, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -160,7 +160,9 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.DefaultCompany.ProjectFantasy
+    Standalone: com.DefaultCompany.Project-Fantasy
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -844,11 +846,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: ee0aff8b-9632-4b02-9e5a-36ace6f09e41
+  cloudProjectId: 6408cc70-b43c-4d3d-bd5d-41b29538710b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Project Fantasy
-  organizationId: gman2205
+  organizationId: gadaharon91
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
