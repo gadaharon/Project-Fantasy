@@ -28,7 +28,7 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
         playerMana = GetComponentInParent<Mana>();
         spellBook = new SpellBook();
 
-        LearnFireElementalMagic();
+        // LearnFireElementalMagic();
     }
 
     public void LearnSpell(SpellSO newSpell)
