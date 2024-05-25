@@ -16,6 +16,11 @@ public class PlayerAnimationHandler : MonoBehaviour
         animator.SetInteger("ComboHit", comboHit);
     }
 
+    public void ToggleReadyWeaponAnimation(bool readyWeapon)
+    {
+        animator.SetBool("ReadyWeapon", readyWeapon);
+    }
+
     // This one currently not in use
     // Will be usefull if we'll add actions that require player to hold the key
     // e.g. firestream
@@ -25,7 +30,10 @@ public class PlayerAnimationHandler : MonoBehaviour
     // }
     public void PlaySpellCastAnimation()
     {
-        animator.SetTrigger("RangeAttack");
+        if (spellCastHandler.CanCastSpell())
+        {
+            animator.SetTrigger("RangeAttack");
+        }
     }
 
     void SpellCastAnimationEvent()

@@ -9,7 +9,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     [SerializeField] float AttackCD = .2f; // Attack cooldown
     [SerializeField] Bar healthBar;
 
-
     PlayerAnimationHandler playerAnimationHandler;
     Weapon playerWeapon;
     Health health;
@@ -19,6 +18,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     int maxComboHits = 3;
     int comboHits = 0;
     float lastAttackTime = 0;
+    bool isWeaponReady = false;
 
     void Awake()
     {
@@ -36,8 +36,22 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     {
         if (GameManager.Instance.State == GameState.Playing)
         {
-            HandleMeleeAttack();
-            HandleRangeAttack();
+            ReadyWeaponToggle();
+
+            if (isWeaponReady)
+            {
+                HandleMeleeAttack();
+                HandleRangeAttack();
+            }
+        }
+    }
+
+    void ReadyWeaponToggle()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            isWeaponReady = !isWeaponReady;
+            playerAnimationHandler.ToggleReadyWeaponAnimation(isWeaponReady);
         }
     }
 

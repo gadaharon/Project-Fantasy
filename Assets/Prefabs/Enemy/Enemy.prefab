@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7632429930856221144}
   - component: {fileID: 8981476250310254906}
   - component: {fileID: 7327790464361574333}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 1, z: 3}
+  m_Size: {x: 5, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7327790464361574333
 MonoBehaviour:
@@ -84,13 +84,13 @@ GameObject:
   - component: {fileID: 9185082909213972206}
   - component: {fileID: 4966035298786207001}
   - component: {fileID: 8164977480458064680}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &491100169881555581
 Transform:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c649a076faf2844bb5c276cddf04ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 10
+  startingHealth: 50
   currentHealth: 0
 --- !u!114 &2618230066749444410
 MonoBehaviour:
@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d823fbe119a2ec54186a3032ae5c2a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 6
 --- !u!114 &9185082909213972206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  range: 10
+  detectionRange: 10
   tetherDistance: 12
 --- !u!114 &4966035298786207001
 MonoBehaviour:
@@ -277,7 +278,7 @@ GameObject:
   - component: {fileID: 6321154824995082413}
   - component: {fileID: 2145752956240846965}
   - component: {fileID: 8203468318785627414}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,6 +13,7 @@ public class Bar : MonoBehaviour
     public void SetMaxValue(float maxValue)
     {
         slider.maxValue = maxValue;
+        slider.value = maxValue;
     }
 
     public void UpdateSLiderValue(float value)

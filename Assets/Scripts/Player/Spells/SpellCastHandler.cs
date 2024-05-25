@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpellCastHandler : Singleton<SpellCastHandler>
 {
@@ -9,6 +10,7 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
     [SerializeField] SpellListSO spellList;
     [SerializeField] Transform spawnPoint;
     [SerializeField] Camera fpsCam;
+    [SerializeField] Image elementUI;
 
     Mana playerMana;
     SpellBook spellBook;
@@ -17,6 +19,7 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
     ElementalType currentElementalType;
     List<ElementalType> knownElementalTypes = new List<ElementalType>();
     int currentElementalTypeIndex = 0;
+
 
 
     // TODO: add projectile object pool
@@ -71,12 +74,25 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
         {
             currentElementalType = elementalType;
             currentSpell = spellBook.spellsByElement[elementalType][0];
+            SetCurrentElementalTypeUI();
             Debug.Log("Switched to " + elementalType + " magic");
         }
         else
         {
             Debug.Log("No spells available for " + elementalType + " magic");
         }
+    }
+
+    void SetCurrentElementalTypeUI()
+    {
+        if (currentSpell == null)
+        {
+            elementUI.gameObject.SetActive(false);
+            return;
+        }
+
+        elementUI.gameObject.SetActive(true);
+        elementUI.sprite = currentSpell.elementSprite;
     }
 
     public void CastCurrentSpell()
@@ -87,7 +103,7 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
             return;
         }
 
-        if (playerMana.CurrentMana >= currentSpell.manaCost)
+        if (CanCastSpell())
         {
             playerMana.UseMana(currentSpell.manaCost);
             Instantiate(currentSpell.spellPrefab, spawnPoint.position, fpsCam.transform.rotation);
@@ -96,6 +112,13 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
         {
             Debug.Log("Not enough mana to cast " + currentSpell.spellName);
         }
+    }
+
+    public bool CanCastSpell()
+    {
+        if (currentSpell == null) { return false; }
+
+        return playerMana.CurrentMana >= currentSpell.manaCost;
     }
 
     void LearnFireElementalMagic()

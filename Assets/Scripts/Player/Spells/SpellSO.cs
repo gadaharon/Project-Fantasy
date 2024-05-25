@@ -16,4 +16,5 @@ public class SpellSO : ScriptableObject
     public ElementalType elementalType;
     public float manaCost;
     public GameObject spellPrefab;
+    public Sprite elementSprite;
 }

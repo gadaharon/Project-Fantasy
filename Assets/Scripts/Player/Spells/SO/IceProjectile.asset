@@ -17,3 +17,4 @@ MonoBehaviour:
   elementalType: 1
   manaCost: 3
   spellPrefab: {fileID: 9003780649202196029, guid: 2b8e91ff00abe2146a0e068481b03405, type: 3}
+  elementSprite: {fileID: 1512435223, guid: ca6900ced892ab04eb307ebf6b1df73b, type: 3}
