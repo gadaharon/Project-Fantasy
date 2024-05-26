@@ -49,7 +49,7 @@ public class EnemyCombat : MonoBehaviour, IDamageable
 
     public void Attack()
     {
-        Character.Instance.gameObject.GetComponent<IDamageable>().TakeDamage(damageAmount);
+        Character.Instance?.gameObject.GetComponent<IDamageable>().TakeDamage(damageAmount);
     }
 
     public void HandleGameOver()

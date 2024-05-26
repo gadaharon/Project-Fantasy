@@ -59,14 +59,14 @@ public class SkillMenu : MonoBehaviour
     public void HandleSaveSkillChanges()
     {
         // TODO: Save skills changes to PlayerRef or json file
-        MenuManager.Instance.ToggleMenu(gameObject);
+        MenuManager.Instance?.ToggleMenu(gameObject);
     }
 
     public void HandleCloseMenu()
     {
         OnRevertChanges?.Invoke();
         RevertChanges();
-        MenuManager.Instance.ToggleMenu(gameObject);
+        MenuManager.Instance?.ToggleMenu(gameObject);
     }
 
     void RevertChanges()

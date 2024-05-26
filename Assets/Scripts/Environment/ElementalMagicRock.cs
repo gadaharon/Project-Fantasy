@@ -1,39 +1,26 @@
+using System;
 using TMPro;
 using UnityEngine;
 
-public class ElementalMagicRock : MonoBehaviour, IInteractable
+public class ElementalMagicRock : InteractableInput
 {
+    public static Action OnElementalMagicLearned;
+
     [SerializeField] ElementalType rockElementalType;
     [SerializeField] TextMeshPro displayTextMeshPro;
     [SerializeField] string displayText;
     [SerializeField] Color textColor = Color.white;
-    [SerializeField] GameObject interactGO;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         displayTextMeshPro.text = displayText;
         displayTextMeshPro.color = textColor;
     }
 
-    public void BeginInteract()
+    protected override void HandleInteraction()
     {
-        interactGO.SetActive(true);
-    }
-
-    public void Interact()
-    {
-        SpellCastHandler.Instance.LearnElementalMagicByType(rockElementalType);
-    }
-
-    public void EndInteract()
-    {
-        GetComponent<BoxCollider>().enabled = false;
-        interactGO.SetActive(false);
-
-    }
-
-    public bool IsInteractionAllowed()
-    {
-        return GetComponent<BoxCollider>().enabled;
+        SpellCastHandler.Instance?.LearnElementalMagicByType(rockElementalType);
+        OnElementalMagicLearned?.Invoke();
     }
 }

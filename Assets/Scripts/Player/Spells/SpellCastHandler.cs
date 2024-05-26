@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SpellCastHandler : Singleton<SpellCastHandler>
 {
@@ -10,7 +9,6 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
     [SerializeField] SpellListSO spellList;
     [SerializeField] Transform spawnPoint;
     [SerializeField] Camera fpsCam;
-    [SerializeField] Image elementUI;
 
     Mana playerMana;
     SpellBook spellBook;
@@ -87,12 +85,12 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
     {
         if (currentSpell == null)
         {
-            elementUI.gameObject.SetActive(false);
+            UIManager.Instance?.ToggleCurrentElementUI(false);
             return;
         }
 
-        elementUI.gameObject.SetActive(true);
-        elementUI.sprite = currentSpell.elementSprite;
+        UIManager.Instance?.ToggleCurrentElementUI(true);
+        UIManager.Instance?.UpdateCurrentElementUISprite(currentSpell.elementSprite);
     }
 
     public void CastCurrentSpell()

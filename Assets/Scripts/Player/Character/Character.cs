@@ -22,12 +22,15 @@ public class Character : Singleton<Character>
     [Header("Skills")]
     [SerializeField] List<Skill> skills = new List<Skill>();
 
+
     [Header("For Testing")]
     [SerializeField] int maxExperience = 100;
     [SerializeField] int currentExperience = 0;
 
     StarterAssetsInputs starterAssetsInputs;
     CharacterSkills characterSkills;
+
+
 
     protected override void Awake()
     {

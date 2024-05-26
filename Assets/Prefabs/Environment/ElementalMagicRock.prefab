@@ -118,8 +118,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6629787814680714929}
   - component: {fileID: 913233877489914900}
-  - component: {fileID: 5878603206870701741}
-  - component: {fileID: 2675148653523948033}
+  - component: {fileID: 9142689918848006674}
+  - component: {fileID: 6946695298283895564}
   m_Layer: 0
   m_Name: ElementalMagicRock
   m_TagString: Untagged
@@ -164,24 +164,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.75, y: 4, z: 2.38}
   m_Center: {x: 0.98, y: 1.7, z: 0}
---- !u!114 &5878603206870701741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3207083862024428333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddfe9669166336e4487a0f2611567fe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rockElementalType: 0
-  displayTextMeshPro: {fileID: 4083739034873770900}
-  displayText: THE ONE WHO IS WORTHY SHALL BE BLESSED WITH THE POWER OF FIRE
-  textColor: {r: 1, g: 0.5058824, b: 0.5058824, a: 1}
-  interactGO: {fileID: 8408700360532235394}
---- !u!114 &2675148653523948033
+--- !u!114 &9142689918848006674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,6 +176,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab0e542bd35014449d9d27e8768df8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6946695298283895564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3207083862024428333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddfe9669166336e4487a0f2611567fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactGO: {fileID: 8408700360532235394}
+  rockElementalType: 0
+  displayTextMeshPro: {fileID: 4083739034873770900}
+  displayText: ONLY THE ONE WHO IS WORTHY SHALL BE BLESSED BY THE POWER OF FIRE
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &8305667081114209938
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +387,11 @@ PrefabInstance:
     - target: {fileID: 3456557451557983375, guid: 61d61d9f48596b2469d5f0d8ce550c01, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: b5828e068ce4dda4bb4ae2153bb3717e, type: 2}
+      objectReference: {fileID: 11400000, guid: 199bfb5cc5791bf4780f0b9e2302c1c1, type: 2}
+    - target: {fileID: 3456557451557983375, guid: 61d61d9f48596b2469d5f0d8ce550c01, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3456557451557983375, guid: 61d61d9f48596b2469d5f0d8ce550c01, type: 3}
       propertyPath: m_fontSizeBase
       value: 2
@@ -395,7 +399,7 @@ PrefabInstance:
     - target: {fileID: 3456557451557983375, guid: 61d61d9f48596b2469d5f0d8ce550c01, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 9124056151896874543, guid: b5828e068ce4dda4bb4ae2153bb3717e, type: 2}
+      objectReference: {fileID: 1145550336305494402, guid: 199bfb5cc5791bf4780f0b9e2302c1c1, type: 2}
     - target: {fileID: 3456557451557983375, guid: 61d61d9f48596b2469d5f0d8ce550c01, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -403,7 +407,7 @@ PrefabInstance:
     - target: {fileID: 5567525674788768485, guid: 61d61d9f48596b2469d5f0d8ce550c01, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 9124056151896874543, guid: b5828e068ce4dda4bb4ae2153bb3717e, type: 2}
+      objectReference: {fileID: 1145550336305494402, guid: 199bfb5cc5791bf4780f0b9e2302c1c1, type: 2}
     - target: {fileID: 6332911313772187888, guid: 61d61d9f48596b2469d5f0d8ce550c01, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.3
@@ -451,6 +455,10 @@ PrefabInstance:
     - target: {fileID: 7092800260523299186, guid: 61d61d9f48596b2469d5f0d8ce550c01, type: 3}
       propertyPath: m_Name
       value: IntiractionIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092800260523299186, guid: 61d61d9f48596b2469d5f0d8ce550c01, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

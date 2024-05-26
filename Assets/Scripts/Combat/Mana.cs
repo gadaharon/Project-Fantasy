@@ -23,7 +23,7 @@ public class Mana : MonoBehaviour
     public void UseMana(float amount)
     {
         currentMana -= amount;
-        manaBar.UpdateSLiderValue(currentMana);
+        manaBar.UpdateSliderValue(currentMana);
         if (currentMana < 0)
         {
             currentMana = 0;
@@ -38,5 +38,6 @@ public class Mana : MonoBehaviour
         {
             currentMana = startingMana;
         }
+        manaBar.UpdateSliderValue(currentMana);
     }
 }

@@ -30,6 +30,6 @@ public class EnemyDeathHandler : MonoBehaviour
         Debug.Log("I'm dead");
         enemyAI.StopEnemyAI();
         animationHandler.PlayDeathAnimation();
-        ExperienceManager.Instance.AddExperience(expAmount);
+        ExperienceManager.Instance?.AddExperience(expAmount);
     }
 }

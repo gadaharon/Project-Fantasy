@@ -9,10 +9,13 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     [SerializeField] float AttackCD = .2f; // Attack cooldown
     [SerializeField] Bar healthBar;
 
+
     PlayerAnimationHandler playerAnimationHandler;
-    Weapon playerWeapon;
     Health health;
+    Mana mana;
     Coroutine comboCoroutine;
+    Weapon playerWeapon;
+
 
     bool isAttacking;
     int maxComboHits = 3;
@@ -23,6 +26,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     void Awake()
     {
         health = GetComponent<Health>();
+        mana = GetComponent<Mana>();
         playerAnimationHandler = GetComponentInChildren<PlayerAnimationHandler>();
         playerWeapon = GetComponentInChildren<Weapon>();
     }
@@ -37,12 +41,47 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         if (GameManager.Instance.State == GameState.Playing)
         {
             ReadyWeaponToggle();
+            HandleConsumablesInput();
 
             if (isWeaponReady)
             {
                 HandleMeleeAttack();
                 HandleRangeAttack();
             }
+        }
+    }
+
+    void HandleConsumablesInput()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            // Gain Health
+            HandleUseHealthPotion();
+        }
+        else if (Input.GetKeyDown(KeyCode.G))
+        {
+            // Gain Mana
+            HandleUseManaPotion();
+        }
+    }
+
+
+    void HandleUseHealthPotion()
+    {
+        if (Inventory.Instance.CanUsePotion(PotionType.Health))
+        {
+            health.AddHealth(Inventory.Instance.HealthPotions.RegainAmount);
+            Inventory.Instance.RemovePotion(PotionType.Health, 1);
+            healthBar.UpdateSliderValue(health.CurrentHealth);
+        }
+    }
+
+    void HandleUseManaPotion()
+    {
+        if (Inventory.Instance.CanUsePotion(PotionType.Mana))
+        {
+            mana.RegainMana(Inventory.Instance.ManaPotions.RegainAmount);
+            Inventory.Instance.RemovePotion(PotionType.Mana, 1);
         }
     }
 
@@ -98,6 +137,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         health.TakeDamage(damage);
-        healthBar.UpdateSLiderValue(health.CurrentHealth);
+        healthBar.UpdateSliderValue(health.CurrentHealth);
     }
 }
