@@ -2676,10 +2676,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 426662563188469830, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523934066025360347, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0013
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523934066025360347, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0039
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523934066025360347, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0046
+      objectReference: {fileID: 0}
+    - target: {fileID: 2011218086790041359, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519637452153068547, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: skills.Array.data[0].level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519637452153068547, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: skills.Array.data[1].level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519637452153068547, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: skills.Array.data[2].level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519637452153068547, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: skills.Array.data[1].skillType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519637452153068547, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: skills.Array.data[2].skillType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4184539508821258534, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 8357057815494440213}
+    - target: {fileID: 4184539508821258534, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
+      propertyPath: meleeDamageMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4725221727186040213, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
       propertyPath: manaBar
       value: 
@@ -2749,7 +2793,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2977585024438747041, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acc9c78467f70f94d9fa03db60e30057, type: 3}
@@ -2930,13 +2975,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7109344433163807282, guid: 4f4b2e5741b2a23468a7a0ab928c7d55, type: 3}
+      propertyPath: damageAmount
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7875512165779579208, guid: 4f4b2e5741b2a23468a7a0ab928c7d55, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7875512165779579208, guid: 4f4b2e5741b2a23468a7a0ab928c7d55, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9185082909213972206, guid: 4f4b2e5741b2a23468a7a0ab928c7d55, type: 3}
       propertyPath: target

@@ -1,15 +1,22 @@
 using System;
 
-
+public enum SkillType
+{
+    Strength,
+    Defense,
+    Magic
+}
 [Serializable]
 public class Skill
 {
     public string name;
+    public SkillType skillType;
     public int level;
 
-    public Skill(string name, int level)
+    public Skill(string name, SkillType skillType, int level)
     {
         this.name = name;
+        this.skillType = skillType;
         this.level = level;
     }
 

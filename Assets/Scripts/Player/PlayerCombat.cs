@@ -8,6 +8,9 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     [SerializeField] float comboTimeout = 1f;
     [SerializeField] float AttackCD = .2f; // Attack cooldown
     [SerializeField] Bar healthBar;
+    [SerializeField] float meleeDamageMultiplier = 0.5f;
+    [SerializeField] float damageReductionMultiplier = 0.4f;
+
 
 
     PlayerAnimationHandler playerAnimationHandler;
@@ -22,6 +25,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     int comboHits = 0;
     float lastAttackTime = 0;
     bool isWeaponReady = false;
+    float minimumDamageTaken = 1;
 
     void Awake()
     {
@@ -29,6 +33,16 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         mana = GetComponent<Mana>();
         playerAnimationHandler = GetComponentInChildren<PlayerAnimationHandler>();
         playerWeapon = GetComponentInChildren<Weapon>();
+    }
+
+    void OnEnable()
+    {
+        playerWeapon.OnTargetHit += HandleMeleeWeaponHit;
+    }
+
+    void OnDisable()
+    {
+        playerWeapon.OnTargetHit -= HandleMeleeWeaponHit;
     }
 
     void Start()
@@ -115,6 +129,19 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         }
     }
 
+    void HandleMeleeWeaponHit(Collider target, float weaponBaseDamage)
+    {
+        float damage = CalculateDamage(weaponBaseDamage);
+        target.GetComponent<IDamageable>()?.TakeDamage(damage);
+    }
+
+    float CalculateDamage(float baseDamage)
+    {
+        Skill skill = Character.Instance.GetSkillByType(SkillType.Strength);
+        float maxDamage = baseDamage + skill.level * meleeDamageMultiplier;
+        return Mathf.Round(Random.Range(baseDamage, maxDamage + 1));
+    }
+
     IEnumerator MeleeAttackRoutine()
     {
         if (!isAttacking) { SetIsAttacking(true); }
@@ -136,7 +163,11 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        health.TakeDamage(damage);
+        Skill skill = Character.Instance.GetSkillByType(SkillType.Defense);
+        float damageReduction = skill.level * damageReductionMultiplier;
+        float damageTaken = Mathf.RoundToInt(Random.Range(damage - damageReduction, damage));
+
+        health.TakeDamage(Mathf.Max(damageTaken, minimumDamageTaken));
         healthBar.UpdateSliderValue(health.CurrentHealth);
     }
 }

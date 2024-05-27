@@ -1,11 +1,14 @@
+using System;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] float damage = 1f;
+    [SerializeField] float damage = 10f;
     [SerializeField] string tagToHit;
 
     [SerializeField] bool canDamage = false;
+
+    public Action<Collider, float> OnTargetHit;
 
     public void SetCanDamage(bool canDamage)
     {
@@ -23,7 +26,8 @@ public class Weapon : MonoBehaviour
         if (other.CompareTag(tagToHit) && canDamage)
         {
             Debug.Log($"Hit {tagToHit}");
-            other.GetComponent<IDamageable>()?.TakeDamage(damage);
+            // other.GetComponent<IDamageable>()?.TakeDamage(damage);
+            OnTargetHit?.Invoke(other, damage);
         }
     }
 }

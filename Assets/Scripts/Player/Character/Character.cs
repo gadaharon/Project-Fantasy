@@ -98,6 +98,19 @@ public class Character : Singleton<Character>
         OnLevelUp?.Invoke();
     }
 
+    public Skill GetSkillByType(SkillType skillType)
+    {
+        foreach (Skill skill in skills)
+        {
+            if (skill.skillType == skillType)
+            {
+                return skill;
+            }
+        }
+        Debug.Log("Skill not found");
+        return null;
+    }
+
     public void SetSkillPoints(int newSkillPoints)
     {
         skillPoints = newSkillPoints;

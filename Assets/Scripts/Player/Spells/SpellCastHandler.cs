@@ -9,6 +9,7 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
     [SerializeField] SpellListSO spellList;
     [SerializeField] Transform spawnPoint;
     [SerializeField] Camera fpsCam;
+    [SerializeField] float magicDamageMultiplier = 0.7f;
 
     Mana playerMana;
     SpellBook spellBook;
@@ -103,14 +104,30 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
 
         if (CanCastSpell())
         {
-            playerMana.UseMana(currentSpell.manaCost);
-            Instantiate(currentSpell.spellPrefab, spawnPoint.position, fpsCam.transform.rotation);
+            HandleSpellFired();
         }
         else
         {
             Debug.Log("Not enough mana to cast " + currentSpell.spellName);
         }
     }
+
+    void HandleSpellFired()
+    {
+        playerMana.UseMana(currentSpell.manaCost);
+        GameObject spellInstance = Instantiate(currentSpell.spellPrefab, spawnPoint.position, fpsCam.transform.rotation);
+        if (spellInstance.GetComponent<Projectile>())
+        {
+            spellInstance.GetComponent<Projectile>().SetProjectileDamage(CalculateDamageEnhancer());
+        }
+    }
+
+    float CalculateDamageEnhancer()
+    {
+        Skill skill = Character.Instance.GetSkillByType(SkillType.Magic);
+        return skill.level * magicDamageMultiplier;
+    }
+
 
     public bool CanCastSpell()
     {
