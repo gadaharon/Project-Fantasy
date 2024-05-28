@@ -57,7 +57,7 @@ public class Character : Singleton<Character>
     void HandleExperienceChange(int newExp)
     {
         currentExperience += newExp;
-        if (currentExperience <= maxExperience)
+        if (currentExperience >= maxExperience)
         {
             LevelUp();
         }

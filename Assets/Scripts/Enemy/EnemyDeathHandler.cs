@@ -5,6 +5,7 @@ public class EnemyDeathHandler : MonoBehaviour
     Health health;
     EnemyAnimationHandler animationHandler;
     EnemyAI enemyAI;
+    Collider body;
 
     int expAmount = 100;
 
@@ -12,7 +13,8 @@ public class EnemyDeathHandler : MonoBehaviour
     {
         health = GetComponent<Health>();
         enemyAI = gameObject.GetComponent<EnemyAI>();
-        animationHandler = GetComponent<EnemyAnimationHandler>();
+        animationHandler = GetComponentInChildren<EnemyAnimationHandler>();
+        body = GetComponent<Collider>();
     }
 
     void OnEnable()
@@ -31,5 +33,10 @@ public class EnemyDeathHandler : MonoBehaviour
         enemyAI.StopEnemyAI();
         animationHandler.PlayDeathAnimation();
         ExperienceManager.Instance?.AddExperience(expAmount);
+
+        if (body != null)
+        {
+            body.enabled = false;
+        }
     }
 }

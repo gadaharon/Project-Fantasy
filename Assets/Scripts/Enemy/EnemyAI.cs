@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
 
 
     NavMeshAgent agent;
+    EnemyAnimationHandler enemyAnimationHandler;
     Transform currentTarget;
     Vector3 startPosition;
 
@@ -22,6 +23,7 @@ public class EnemyAI : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        enemyAnimationHandler = GetComponentInChildren<EnemyAnimationHandler>();
         aiEnabled = true;
     }
 
@@ -29,21 +31,27 @@ public class EnemyAI : MonoBehaviour
     {
         InvokeRepeating(nameof(DistanceCheck), 0, distanceCheckInterval);
         startPosition = transform.position;
-
     }
 
     void Update()
     {
         if (!aiEnabled) { return; }
+        SyncAnimationAndAgent();
 
         if (currentTarget != null)
         {
             agent.destination = currentTarget.position;
+            FaceTarget();
         }
         else if (agent.destination != startPosition)
         {
             agent.destination = startPosition;
         }
+    }
+
+    void SyncAnimationAndAgent()
+    {
+        enemyAnimationHandler.PlayEnemyMoveAnimation(agent.velocity.magnitude > 0.01);
     }
 
 
@@ -61,15 +69,25 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    void FaceTarget()
+    {
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            Vector3 direction = (currentTarget.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+    }
+
     public void TriggerEnemy()
     {
         if (!isTriggered)
         {
-            StartCoroutine(TriggerENemyRoutine());
+            StartCoroutine(TriggerEnemyRoutine());
         }
     }
 
-    IEnumerator TriggerENemyRoutine()
+    IEnumerator TriggerEnemyRoutine()
     {
         isTriggered = true;
 

@@ -9,23 +9,23 @@ public class EnemyCombat : MonoBehaviour, IDamageable
     EnemyAnimationHandler animationHandler;
 
     bool isAttacking = false;
-    bool canAttack = false;
+    [SerializeField] bool canAttack = false;
 
     void Awake()
     {
         health = GetComponent<Health>();
         enemyAI = GetComponent<EnemyAI>();
-        animationHandler = GetComponent<EnemyAnimationHandler>();
+        animationHandler = GetComponentInChildren<EnemyAnimationHandler>();
     }
 
     void OnEnable()
     {
-        GameManager.OnGameOver += HandleGameOver;
+        GameManager.OnGameOver += HandleStopEnemy;
     }
 
     void OnDisable()
     {
-        GameManager.OnGameOver -= HandleGameOver;
+        GameManager.OnGameOver -= HandleStopEnemy;
     }
 
     void Update()
@@ -52,7 +52,7 @@ public class EnemyCombat : MonoBehaviour, IDamageable
         Character.Instance?.gameObject.GetComponent<IDamageable>().TakeDamage(damageAmount);
     }
 
-    public void HandleGameOver()
+    public void HandleStopEnemy()
     {
         enemyAI.StopEnemyAI();
         canAttack = false;
@@ -60,6 +60,9 @@ public class EnemyCombat : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (health.IsDead) { return; }
+
+        animationHandler.PlayTakeDamageAnimation();
         enemyAI.TriggerEnemy();
         health.TakeDamage(damage);
     }
