@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class EnemyDeathHandler : MonoBehaviour
 {
+    [SerializeField] int expAmount = 50;
     Health health;
     EnemyAnimationHandler animationHandler;
     EnemyAI enemyAI;
     Collider body;
-
-    int expAmount = 100;
 
     void Awake()
     {

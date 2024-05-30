@@ -5,6 +5,7 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField] GameObject invisibleWall;
     [SerializeField] FadeTransition potionsLootTextPrompt;
+    [SerializeField] FadeTransition combatTutorialPrompt;
 
     void OnEnable()
     {
@@ -21,6 +22,7 @@ public class Tutorial : MonoBehaviour
     void HandleOnElementalMagicLearn()
     {
         invisibleWall.SetActive(false);
+        combatTutorialPrompt.StartTextFadeTransitionInOut();
     }
 
     void HandleDisplayLootTutorialPrompt(List<LootItem> items)

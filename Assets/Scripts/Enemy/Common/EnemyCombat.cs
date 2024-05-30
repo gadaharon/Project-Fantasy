@@ -1,13 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour, IDamageable
 {
-    [SerializeField] float damageAmount = 2f;
+    [SerializeField] float defaultDamage = 10f;
+
+    [Tooltip("List of Attacks, incase the enemy has multiple attacks")]
+    [SerializeField] List<float> attackDamages;
+    [SerializeField] Bar healthBar;
 
     Health health;
     EnemyAI enemyAI;
     EnemyAnimationHandler animationHandler;
 
+    int currentAttackIndex = -1;
     bool isAttacking = false;
     [SerializeField] bool canAttack = false;
 
@@ -37,19 +43,35 @@ public class EnemyCombat : MonoBehaviour, IDamageable
     {
         if (canAttack && !isAttacking)
         {
-            isAttacking = true;
-            animationHandler.PlayAttackAnimation(true);
+            SetNewAttackType();
         }
         else if (!canAttack && isAttacking)
         {
             isAttacking = false;
-            animationHandler.PlayAttackAnimation(false);
+            animationHandler.StopAttacking();
         }
+    }
+
+    public void SetNewAttackType()
+    {
+        isAttacking = true;
+        if (attackDamages != null && attackDamages.Count > 0)
+        {
+            currentAttackIndex = Random.Range(0, attackDamages.Count);
+        }
+        animationHandler.PlayAttackAnimation(currentAttackIndex);
     }
 
     public void Attack()
     {
-        Character.Instance?.gameObject.GetComponent<IDamageable>().TakeDamage(damageAmount);
+        if (currentAttackIndex != -1)
+        {
+            Character.Instance?.gameObject.GetComponent<IDamageable>().TakeDamage(attackDamages[currentAttackIndex]);
+        }
+        else
+        {
+            Character.Instance?.gameObject.GetComponent<IDamageable>().TakeDamage(defaultDamage);
+        }
     }
 
     public void HandleStopEnemy()
@@ -65,6 +87,11 @@ public class EnemyCombat : MonoBehaviour, IDamageable
         animationHandler.PlayTakeDamageAnimation();
         enemyAI.TriggerEnemy();
         health.TakeDamage(damage);
+        // incase enemy has health bar
+        if (healthBar != null && healthBar.gameObject.activeInHierarchy)
+        {
+            healthBar.UpdateSliderValue(health.CurrentHealth);
+        }
     }
 
     public void SetCanAttack(bool canAttack)

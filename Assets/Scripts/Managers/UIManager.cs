@@ -13,6 +13,10 @@ public class UIManager : Singleton<UIManager>
     [Header("Player Magic")]
     [SerializeField] Image currentElementUI;
 
+    [Header("Boss Health Bar")]
+    [SerializeField] TextMeshProUGUI bossDisplayName;
+    [SerializeField] GameObject bossHealthBarGO;
+
 
     public void UpdatePotionAmount(PotionType potionType, int amount)
     {
@@ -34,6 +38,16 @@ public class UIManager : Singleton<UIManager>
     public void UpdateCurrentElementUISprite(Sprite sprite)
     {
         currentElementUI.sprite = sprite;
+    }
+
+    public void ToggleBossHealthBar(bool isActive)
+    {
+        bossHealthBarGO.SetActive(isActive);
+    }
+
+    public void SetBossDisplayName(string bossName)
+    {
+        bossDisplayName.text = bossName;
     }
 
 

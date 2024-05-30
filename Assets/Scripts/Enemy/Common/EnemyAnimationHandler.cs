@@ -11,6 +11,13 @@ public class EnemyAnimationHandler : MonoBehaviour
         enemyCombat = GetComponentInParent<EnemyCombat>();
     }
 
+    public void PlayEnemyRiseAnimation()
+    {
+        if (animator == null) { return; }
+
+        animator.SetTrigger("Rise");
+    }
+
     public void PlayEnemyMoveAnimation(bool isMoving)
     {
         if (isMoving && !animator.GetBool("Move"))
@@ -23,11 +30,22 @@ public class EnemyAnimationHandler : MonoBehaviour
         }
     }
 
-    public void PlayAttackAnimation(bool isAttacking)
+    public void PlayAttackAnimation(int attackType)
     {
         if (animator == null) { return; }
 
-        animator.SetBool("IsAttacking", isAttacking);
+        if (attackType != -1)
+        {
+            animator.SetInteger("AttackType", attackType);
+        }
+        animator.SetBool("IsAttacking", true);
+    }
+
+    public void StopAttacking()
+    {
+        if (animator == null) { return; }
+
+        animator.SetBool("IsAttacking", false);
     }
 
     public void PlayTakeDamageAnimation()
@@ -45,5 +63,10 @@ public class EnemyAnimationHandler : MonoBehaviour
     public void AttackAnimationEvent()
     {
         enemyCombat.Attack();
+    }
+
+    public void AttackFinishAnimationEvent()
+    {
+        enemyCombat.SetNewAttackType();
     }
 }

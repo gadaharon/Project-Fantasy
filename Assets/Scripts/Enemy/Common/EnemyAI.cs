@@ -36,6 +36,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         if (!aiEnabled) { return; }
+
         SyncAnimationAndAgent();
 
         if (currentTarget != null)
@@ -111,9 +112,10 @@ public class EnemyAI : MonoBehaviour
 
     public void StopEnemyAI()
     {
-        aiEnabled = false;
-        CancelInvoke(nameof(DistanceCheck));
         StopFollow();
+        aiEnabled = false;
+        agent.destination = transform.position;
+        CancelInvoke(nameof(DistanceCheck));
     }
 
     // void OnDrawGizmos()
