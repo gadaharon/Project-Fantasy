@@ -40,4 +40,9 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         spellCastHandler.CastCurrentSpell();
     }
+
+    void MeleeAttackAnimationEvent()
+    {
+        AudioManager.Instance.PlaySwordSwingSFX();
+    }
 }

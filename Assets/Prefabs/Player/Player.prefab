@@ -58,11 +58,14 @@ MonoBehaviour:
   currentLevel: 1
   skills:
   - name: strength
-    level: 4
+    skillType: 0
+    level: 5
   - name: defense
-    level: 3
+    skillType: 1
+    level: 5
   - name: magic
-    level: 3
+    skillType: 2
+    level: 5
   maxExperience: 100
   currentExperience: 0
 --- !u!114 &3452089738635314219
@@ -121,14 +124,8 @@ MonoBehaviour:
   comboTimeout: 0.9
   AttackCD: 0.5
   healthBar: {fileID: 0}
-  healthPotions:
-    amountOfPotions: 3
-    potionType: 0
-    regainAmount: 20
-  manaPotions:
-    amountOfPotions: 3
-    potionType: 1
-    regainAmount: 10
+  meleeDamageMultiplier: 0.5
+  damageReductionMultiplier: 0.4
 --- !u!114 &7341821941480073452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +138,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c045a795b7dbe44aa1b9ef5b8ee33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPotions:
+    amountOfPotions: 0
+    potionType: 0
+    regainAmount: 50
+  manaPotions:
+    amountOfPotions: 0
+    potionType: 1
+    regainAmount: 15
 --- !u!1001 &2538407725071061102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -330,6 +335,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5302288441766534638}
     m_Modifications:
+    - target: {fileID: -8101900491571144218, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 365261223842042274, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_Size.x
       value: 0.05
@@ -1158,6 +1167,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 2.77
       objectReference: {fileID: 0}
+    - target: {fileID: 7821672273806654648, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0013
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821672273806654648, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0039
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821672273806654648, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0046
+      objectReference: {fileID: 0}
     - target: {fileID: 7943343764462421170, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.8639289
@@ -1254,6 +1275,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -52.083
       objectReference: {fileID: 0}
+    - target: {fileID: 8953718870561318693, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1304,7 +1329,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6306833617997527831, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5834608228402145474, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}

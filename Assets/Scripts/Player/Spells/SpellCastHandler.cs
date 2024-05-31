@@ -116,9 +116,15 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
     {
         playerMana.UseMana(currentSpell.manaCost);
         GameObject spellInstance = Instantiate(currentSpell.spellPrefab, spawnPoint.position, fpsCam.transform.rotation);
+
         if (spellInstance.GetComponent<Projectile>())
         {
             spellInstance.GetComponent<Projectile>().SetProjectileDamage(CalculateDamageEnhancer());
+        }
+
+        if (currentSpell.spellType == SpellType.FireBall)
+        {
+            AudioManager.Instance.PlayFireballSFX();
         }
     }
 

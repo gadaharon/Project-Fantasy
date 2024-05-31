@@ -15,6 +15,6 @@ MonoBehaviour:
   spellName: Fireball
   spellType: 0
   elementalType: 0
-  manaCost: 3
+  manaCost: 7
   spellPrefab: {fileID: 6601581982667529765, guid: 2e550e2ba6586c84abeae697d939d019, type: 3}
   elementSprite: {fileID: 1981265320, guid: ca6900ced892ab04eb307ebf6b1df73b, type: 3}
