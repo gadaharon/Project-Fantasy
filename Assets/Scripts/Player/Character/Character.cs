@@ -130,6 +130,7 @@ public class Character : Singleton<Character>
     {
         starterAssetsInputs.cursorLocked = newState;
         starterAssetsInputs.cursorInputForLook = newState;
+        starterAssetsInputs.look = Vector2.zero;
         Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
     }
 }

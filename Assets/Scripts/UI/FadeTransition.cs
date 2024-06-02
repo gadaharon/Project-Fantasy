@@ -19,6 +19,12 @@ public class FadeTransition : MonoBehaviour
 
     public void StartTextFadeTransitionInOut()
     {
+        if (textFade == null)
+        {
+            Debug.Log("No text element found");
+            return;
+        }
+
         StartCoroutine(FadeInOutRoutine());
     }
 

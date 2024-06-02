@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
 
     void Awake()
     {
-        currentHealth = startingHealth;
+        ResetHealth();
     }
 
     public void AddHealth(float amount)
@@ -32,7 +32,7 @@ public class Health : MonoBehaviour
         currentHealth += amount;
     }
 
-    void ResetHealth()
+    public void ResetHealth()
     {
         currentHealth = startingHealth;
     }

@@ -58,6 +58,11 @@ public class EnemyAI : MonoBehaviour
 
     void DistanceCheck()
     {
+        if (target == null)
+        {
+            target = PlayerSettings.Instance.PlayerBody;
+        }
+
         float distance = Vector3.Distance(transform.position, target.position);
 
         if (distance < detectionRange || isTriggered)

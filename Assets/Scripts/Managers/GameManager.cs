@@ -1,4 +1,6 @@
 using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -24,8 +26,41 @@ public class GameManager : Singleton<GameManager>
         OnGameOver?.Invoke();
     }
 
+    public void RestartGame()
+    {
+        SetGameState(GameState.Playing);
+        MenuManager.Instance.ToggleGameOverMenu();
+        PlayerCombat.Instance.ResetPlayer();
+        LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void SetGameState(GameState newState)
     {
         State = newState;
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void StartGame()
+    {
+        LoadScene("Tutorial");
+    }
+
+    public void ReturnToMainMenu()
+    {
+        GameObject scenePersist = GameObject.Find("ScenePersist");
+        if (scenePersist != null)
+        {
+            Destroy(scenePersist);
+        }
+        LoadScene("MainMenu");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

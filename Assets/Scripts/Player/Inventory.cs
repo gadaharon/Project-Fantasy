@@ -10,11 +10,11 @@ public class Inventory : Singleton<Inventory>
     [SerializeField] Potion healthPotions;
     [SerializeField] Potion manaPotions;
 
-    void Start()
-    {
-        UpdatePotionsUI(PotionType.Health, healthPotions.AmountOfPotions);
-        UpdatePotionsUI(PotionType.Mana, manaPotions.AmountOfPotions);
-    }
+    // void Start()
+    // {
+    //     UpdatePotionsUI(PotionType.Health, healthPotions.AmountOfPotions);
+    //     UpdatePotionsUI(PotionType.Mana, manaPotions.AmountOfPotions);
+    // }
 
     void OnEnable()
     {
@@ -24,6 +24,18 @@ public class Inventory : Singleton<Inventory>
     void OnDisable()
     {
         Loot.OnLootItems -= HandleCollectItems;
+    }
+
+    void Update()
+    {
+        if (healthPotions != null)
+        {
+            UpdatePotionsUI(PotionType.Health, healthPotions.AmountOfPotions);
+        }
+        if (manaPotions != null)
+        {
+            UpdatePotionsUI(PotionType.Mana, manaPotions.AmountOfPotions);
+        }
     }
 
     void HandleCollectItems(List<LootItem> items)
@@ -53,7 +65,6 @@ public class Inventory : Singleton<Inventory>
         {
             manaPotions.AddNewPotion(amount);
         }
-        UpdatePotionsUI(type, amount);
     }
 
     public void RemovePotion(PotionType type, int amount)
@@ -61,12 +72,10 @@ public class Inventory : Singleton<Inventory>
         if (type == PotionType.Health)
         {
             healthPotions.RemovePotion(amount);
-            UpdatePotionsUI(type, healthPotions.AmountOfPotions);
         }
         else if (type == PotionType.Mana)
         {
             manaPotions.RemovePotion(amount);
-            UpdatePotionsUI(type, manaPotions.AmountOfPotions);
         }
     }
 

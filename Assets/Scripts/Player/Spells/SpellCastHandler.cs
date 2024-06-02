@@ -82,7 +82,7 @@ public class SpellCastHandler : Singleton<SpellCastHandler>
         }
     }
 
-    void SetCurrentElementalTypeUI()
+    public void SetCurrentElementalTypeUI()
     {
         if (currentSpell == null)
         {

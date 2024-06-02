@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour, IDamageable
+public class PlayerCombat : Singleton<PlayerCombat>, IDamageable
 {
     public bool IsAttacking => isAttacking;
 
     [SerializeField] float comboTimeout = 1f;
     [SerializeField] float AttackCD = .2f; // Attack cooldown
-    [SerializeField] Bar healthBar;
     [SerializeField] float meleeDamageMultiplier = 0.5f;
     [SerializeField] float damageReductionMultiplier = 0.4f;
 
@@ -27,8 +26,9 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     bool isWeaponReady = false;
     float minimumDamageTaken = 1;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         health = GetComponent<Health>();
         mana = GetComponent<Mana>();
         playerAnimationHandler = GetComponentInChildren<PlayerAnimationHandler>();
@@ -45,17 +45,14 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         playerWeapon.OnTargetHit -= HandleMeleeWeaponHit;
     }
 
-    void Start()
-    {
-        healthBar.SetMaxValue(health.StartingHealth);
-    }
-
     void Update()
     {
         if (GameManager.Instance.State == GameState.Playing)
         {
             ReadyWeaponToggle();
             HandleConsumablesInput();
+            UpdatePlayerStats();
+
 
             if (isWeaponReady)
             {
@@ -63,6 +60,18 @@ public class PlayerCombat : MonoBehaviour, IDamageable
                 HandleRangeAttack();
             }
         }
+    }
+
+    public void InitPlayerStatsUI()
+    {
+        UIManager.Instance.SetPlayerMaxHealthUI(health.StartingHealth);
+        UIManager.Instance.SetPlayerMaxManaUI(mana.StartingMana);
+    }
+
+    void UpdatePlayerStats()
+    {
+        UIManager.Instance.UpdatePlayerHealthUI(health.CurrentHealth);
+        UIManager.Instance.UpdatePlayerManaUI(mana.CurrentMana);
     }
 
     void HandleConsumablesInput()
@@ -86,7 +95,6 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         {
             health.AddHealth(Inventory.Instance.HealthPotions.RegainAmount);
             Inventory.Instance.RemovePotion(PotionType.Health, 1);
-            healthBar.UpdateSliderValue(health.CurrentHealth);
         }
     }
 
@@ -168,6 +176,12 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         float damageTaken = Mathf.RoundToInt(Random.Range(damage - damageReduction, damage));
 
         health.TakeDamage(Mathf.Max(damageTaken, minimumDamageTaken));
-        healthBar.UpdateSliderValue(health.CurrentHealth);
+    }
+
+    public void ResetPlayer()
+    {
+        health.ResetHealth();
+        mana.ResetMana();
+
     }
 }

@@ -23,6 +23,7 @@ public class PlayerDeathHandler : MonoBehaviour
     {
         Debug.Log("Player is dead");
         // Play death animation
+        MenuManager.Instance.ToggleGameOverMenu();
         GameManager.Instance?.SetGameState(GameState.GameOver);
         GameManager.TriggerGameOver();
     }

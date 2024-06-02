@@ -28,7 +28,6 @@ public class EnemyDeathHandler : MonoBehaviour
 
     void HandleDeath(Health health)
     {
-        Debug.Log("I'm dead");
         enemyAI.StopEnemyAI();
         animationHandler.PlayDeathAnimation();
         ExperienceManager.Instance?.AddExperience(expAmount);

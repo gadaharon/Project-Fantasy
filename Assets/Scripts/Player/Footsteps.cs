@@ -9,7 +9,6 @@ public class Footsteps : MonoBehaviour
     FirstPersonController controller;
 
     float footstepTimer = 0f;
-    float sprintMultiplier = 2f;
 
     void Awake()
     {

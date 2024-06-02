@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 #endif
 
 namespace StarterAssets
@@ -58,7 +59,7 @@ namespace StarterAssets
 		private float _cinemachineTargetPitch;
 
 		// player
-		private float _speed;
+		[SerializeField] private float _speed;
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
@@ -98,6 +99,16 @@ namespace StarterAssets
 			}
 		}
 
+		private void OnEnable()
+		{
+			SceneManager.activeSceneChanged += HandleStopMove;
+		}
+
+		private void OnDisable()
+		{
+			SceneManager.activeSceneChanged -= HandleStopMove;
+		}
+
 		private void Start()
 		{
 			_controller = GetComponent<CharacterController>();
@@ -130,6 +141,16 @@ namespace StarterAssets
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+		}
+
+		private void HandleStopMove(Scene current, Scene next)
+		{
+			_speed = 0;
+			if (_input != null)
+			{
+				_input.move = Vector2.zero;
+			}
+			// gameObject.SetActive(false);
 		}
 
 		private void CameraRotation()

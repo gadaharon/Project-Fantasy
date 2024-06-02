@@ -18,6 +18,8 @@ public class Bar : MonoBehaviour
 
     public void UpdateSliderValue(float value)
     {
+        if (slider.value == value) { return; }
+
         if (value <= 0)
         {
             slider.value = 0;

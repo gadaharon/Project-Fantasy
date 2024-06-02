@@ -26,8 +26,6 @@ public class Weapon : MonoBehaviour
         if (other.CompareTag(tagToHit) && canDamage)
         {
             AudioManager.Instance.PlaySwordHitSFX();
-            Debug.Log($"Hit {tagToHit}");
-            // other.GetComponent<IDamageable>()?.TakeDamage(damage);
             OnTargetHit?.Invoke(other, damage);
         }
     }

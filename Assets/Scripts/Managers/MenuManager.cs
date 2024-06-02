@@ -3,6 +3,8 @@ using UnityEngine;
 public class MenuManager : Singleton<MenuManager>
 {
     [SerializeField] GameObject skillMenu;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject gameOverCanvas;
 
     GameObject currentMenu;
 
@@ -17,6 +19,10 @@ public class MenuManager : Singleton<MenuManager>
         if (Input.GetKeyDown(KeyCode.K))
         {
             ToggleMenu(skillMenu);
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleMenu(pauseMenu);
         }
     }
 
@@ -42,5 +48,22 @@ public class MenuManager : Singleton<MenuManager>
 
         Time.timeScale = menu.activeSelf ? 0f : 1f;
         Character.Instance?.SetCharacterCursorLook(!menu.activeSelf);
+    }
+
+    public void ToggleGameOverMenu()
+    {
+        ToggleMenu(gameOverCanvas);
+    }
+
+    public void GameOverRestartButtonEvent()
+    {
+        GameManager.Instance.RestartGame();
+    }
+
+    public void QuitButtonEvent()
+    {
+        // ToggleMenu(currentMenu);
+        // GameManager.Instance.ReturnToMainMenu();
+        GameManager.Instance.QuitGame();
     }
 }

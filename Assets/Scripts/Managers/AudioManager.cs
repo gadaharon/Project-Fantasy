@@ -6,12 +6,21 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioClip[] swordSwingsSFX;
     [SerializeField] AudioClip swordHit;
     [SerializeField] AudioClip fireballSpell;
+
     AudioSource audioSource;
 
     protected override void Awake()
     {
         base.Awake();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    public void ChangeBackgroundMusic(AudioClip clip, float volume, bool isLoop)
+    {
+        audioSource.clip = clip;
+        audioSource.volume = volume;
+        audioSource.loop = isLoop;
+        audioSource.Play();
     }
 
     public void PlayFootstepSFX()
@@ -32,6 +41,6 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayFireballSFX()
     {
-        audioSource.PlayOneShot(fireballSpell);
+        audioSource.PlayOneShot(fireballSpell, 0.6f);
     }
 }
